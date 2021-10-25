@@ -1,0 +1,16 @@
+const net = require("net");
+
+const server = net.createServer((socket) => {
+  console.log("requst");
+  socket.on("data", (data) => {
+    console.log(data.toString());
+
+    const statusLine = "HTTP/1.1 200 OK\r\n";
+    const header = "Host: codesandbox\r\n";
+    const response = "public/index.html";
+    socket.write(response);
+    socket.end();
+  });
+});
+
+server.listen(8080);
